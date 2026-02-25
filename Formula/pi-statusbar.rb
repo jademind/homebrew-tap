@@ -1,9 +1,9 @@
 class PiStatusbar < Formula
   desc "Pi macOS status bar app with local daemon and session controls"
   homepage "https://github.com/jademind/pi-statusbar"
-  url "https://github.com/jademind/pi-statusbar/archive/refs/tags/v0.1.6.tar.gz"
-  sha256 "427ef8f750a5ae5e9a1b32defe17048922f96966d54eeacfe0925d314a1d9372"
-  version "0.1.6"
+  url "https://github.com/jademind/pi-statusbar/archive/refs/tags/v0.1.7.tar.gz"
+  sha256 "29a8c75968105e7b0aa0b5f72e67c5ad1de6c033c60e727031b189e80fdd0117"
+  version "0.1.7"
   license "MIT"
   head "https://github.com/jademind/pi-statusbar.git", branch: "main"
 
@@ -23,6 +23,7 @@ class PiStatusbar < Formula
     (bin/"statusdctl").write_env_script libexec/"daemon/statusdctl", PI_STATUSBAR_ROOT: libexec
     (bin/"statusd-service").write_env_script libexec/"daemon/statusd-service", PI_STATUSBAR_ROOT: libexec
     (bin/"statusbar-app-service").write_env_script libexec/"daemon/statusbar-app-service", PI_STATUSBAR_ROOT: libexec
+    (bin/"statusbar-setup").write_env_script libexec/"daemon/statusbar-setup", PI_STATUSBAR_ROOT: libexec
   end
 
   service do
@@ -39,23 +40,20 @@ class PiStatusbar < Formula
 
   def caveats
     <<~EOS
-      Start now + enable at login:
-        statusd-service install
-        statusd-service start
-        statusbar-app-service install
-        statusbar-app-service start
+      Quick setup (start now + enable at login):
+        statusbar-setup enable
+
+      Start now only (no login autostart):
+        statusbar-setup enable --login no
+
+      Stop now:
+        statusbar-setup stop
+
+      Stop and remove login autostart:
+        statusbar-setup stop --remove yes
 
       Verify:
-        statusd-service status
-        statusbar-app-service status
-
-      Stop:
-        statusd-service stop
-        statusbar-app-service stop
-
-      Disable autostart:
-        statusd-service uninstall
-        statusbar-app-service uninstall
+        statusbar-setup status
     EOS
   end
 
