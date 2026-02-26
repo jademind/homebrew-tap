@@ -1,9 +1,9 @@
 class PiStatusbar < Formula
   desc "Pi macOS status bar app with local daemon and session controls"
   homepage "https://github.com/jademind/pi-statusbar"
-  url "https://github.com/jademind/pi-statusbar/archive/refs/tags/v0.1.13.tar.gz"
-  sha256 "aa18edd1055eb1bf6f4b5b02440be503540e0d6e30158d5777207120d75a8a57"
-  version "0.1.13"
+  url "https://github.com/jademind/pi-statusbar/archive/refs/tags/v0.1.14.tar.gz"
+  sha256 "2f26e5aea0b1714ce8f24efb199fdb26b5ab8b6423c0a22ae01e513f3c01dc28"
+  version "0.1.14"
   license "MIT"
   head "https://github.com/jademind/pi-statusbar.git", branch: "main"
 
@@ -35,11 +35,11 @@ class PiStatusbar < Formula
 
   def caveats
     <<~EOS
-      Quick setup (start now + enable at login):
-        pi-statusbar enable
+      Quick setup (start now + start at login):
+        pi-statusbar start
 
       Start now only (no login autostart):
-        pi-statusbar enable --login no
+        pi-statusbar start --login no
 
       Stop now:
         pi-statusbar stop
